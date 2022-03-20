@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "github-repo-browse"
 include ':app'
+include ':data-android'
+include ':domain'
