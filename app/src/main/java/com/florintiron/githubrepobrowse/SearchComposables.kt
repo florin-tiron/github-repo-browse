@@ -24,24 +24,24 @@ import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun SearchScreen(
-    openShowDetails: (showId: String) -> Unit,
+    showRepoDetails: (repoId: String) -> Unit,
 ) {
     SearchScreenContent(
         viewModel = hiltViewModel(),
-        openRepoDetails = openShowDetails,
+        showRepoDetails = showRepoDetails,
     )
 }
 
 @Composable
 private fun SearchScreenContent(
     viewModel: SearchReposViewModel,
-    openRepoDetails: (showId: String) -> Unit,
+    showRepoDetails: (repoId: String) -> Unit,
 ) {
     val viewState by rememberFlowWithLifecycle(viewModel.uiState).collectAsState(initial = SearchRepoViewState.Empty)
 
     SearchScreenContent(
         state = viewState,
-        openRepoDetails = openRepoDetails,
+        showRepoDetails = showRepoDetails,
         onSearchQueryChanged = { viewModel.onSearchForRepository(it) },
     )
 }
@@ -49,7 +49,7 @@ private fun SearchScreenContent(
 @Composable
 private fun SearchScreenContent(
     state: SearchRepoViewState,
-    openRepoDetails: (showId: String) -> Unit,
+    showRepoDetails: (repoId: String) -> Unit,
     onSearchQueryChanged: (query: String) -> Unit,
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -88,7 +88,7 @@ private fun SearchScreenContent(
             ResultsList(
                 results = state.searchResults,
                 contentPadding = padding,
-                onRepoClicked = { openRepoDetails(it.id) }
+                onRepoClicked = { showRepoDetails(it.id) }
             )
         } else if (state.refreshing.not()) {
             Box(

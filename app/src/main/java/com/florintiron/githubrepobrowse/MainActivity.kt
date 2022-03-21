@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     SearchScreen(
-                        openShowDetails = { repoId ->
+                        showRepoDetails = { repoId ->
                             Toast.makeText(
                                 this,
                                 "Repository id: $repoId",
