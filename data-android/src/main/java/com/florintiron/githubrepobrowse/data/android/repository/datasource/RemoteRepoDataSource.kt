@@ -1,10 +1,10 @@
-package com.florintiron.githubrepobrowse.data.android.network.search.datasource
+package com.florintiron.githubrepobrowse.data.android.repository.datasource
 
 import com.florintiron.githubrepobrowse.data.android.network.search.model.SearchResponse
 import com.florintiron.githubrepobrowse.data.android.network.shared.model.GithubRepo
 import retrofit2.Response
 
-interface RemoteSearchDataSource {
+interface RemoteRepoDataSource {
 
     suspend fun getGithubRepoList(
         query: String,

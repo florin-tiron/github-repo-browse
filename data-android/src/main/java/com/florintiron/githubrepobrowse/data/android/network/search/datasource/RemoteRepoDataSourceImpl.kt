@@ -3,10 +3,11 @@ package com.florintiron.githubrepobrowse.data.android.network.search.datasource
 import com.florintiron.githubrepobrowse.data.android.network.GithubServiceApi
 import com.florintiron.githubrepobrowse.data.android.network.search.model.SearchResponse
 import com.florintiron.githubrepobrowse.data.android.network.shared.model.GithubRepo
+import com.florintiron.githubrepobrowse.data.android.repository.datasource.RemoteRepoDataSource
 import retrofit2.Response
 
-class RemoteSearchDataSourceImpl(private val githubServiceApi: GithubServiceApi) :
-    RemoteSearchDataSource {
+class RemoteRepoDataSourceImpl(private val githubServiceApi: GithubServiceApi) :
+    RemoteRepoDataSource {
     override suspend fun getGithubRepoList(
         query: String,
         sort: String?,

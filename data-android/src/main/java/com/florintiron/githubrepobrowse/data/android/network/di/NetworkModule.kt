@@ -1,8 +1,8 @@
 package com.florintiron.githubrepobrowse.data.android.network.di
 
 import com.florintiron.githubrepobrowse.data.android.network.GithubServiceApi
-import com.florintiron.githubrepobrowse.data.android.network.search.datasource.RemoteSearchDataSource
-import com.florintiron.githubrepobrowse.data.android.network.search.datasource.RemoteSearchDataSourceImpl
+import com.florintiron.githubrepobrowse.data.android.repository.datasource.RemoteRepoDataSource
+import com.florintiron.githubrepobrowse.data.android.network.search.datasource.RemoteRepoDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -67,6 +67,6 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRemoteSearchDataSource(apiService: GithubServiceApi): RemoteSearchDataSource =
-        RemoteSearchDataSourceImpl(apiService)
+    fun provideRemoteSearchDataSource(apiService: GithubServiceApi): RemoteRepoDataSource =
+        RemoteRepoDataSourceImpl(apiService)
 }

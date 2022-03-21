@@ -1,7 +1,8 @@
 package com.florintiron.githubrepobrowse.data.android.di
 
-import com.florintiron.githubrepobrowse.data.android.GithubRepoSearchRepositoryImpl
-import com.florintiron.githubrepobrowse.data.android.network.search.datasource.RemoteSearchDataSource
+import com.florintiron.githubrepobrowse.data.android.repository.GithubRepoSearchRepositoryImpl
+import com.florintiron.githubrepobrowse.data.android.repository.datasource.LocalRepoDataSource
+import com.florintiron.githubrepobrowse.data.android.repository.datasource.RemoteRepoDataSource
 import com.florintiron.githubrepobrowse.domain.repository.GithubRepoRepository
 import dagger.Module
 import dagger.Provides
@@ -17,10 +18,12 @@ object DataModule {
     @Singleton
     @Provides
     fun provideGithubRepoSearchRepository(
-        dataSource: RemoteSearchDataSource
+        remoteDataSource: RemoteRepoDataSource,
+        localRepoDataSource: LocalRepoDataSource,
     ): GithubRepoRepository =
         GithubRepoSearchRepositoryImpl(
-            remoteSearchDataSource = dataSource,
+            remoteRepoDataSource = remoteDataSource,
+            localRepoDataSource = localRepoDataSource,
             coroutineContext = Dispatchers.IO
         )
 }
