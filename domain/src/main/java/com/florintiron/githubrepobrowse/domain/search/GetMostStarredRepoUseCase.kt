@@ -8,7 +8,7 @@ import com.florintiron.githubrepobrowse.domain.repository.model.Sort
 import com.florintiron.githubrepobrowse.domain.shared.model.GithubRepoData
 import javax.inject.Inject
 
-class GetMostStarredGithubRepoUseCase @Inject constructor(private val githubRepoRepository: GithubRepoRepository) :
+class GetMostStarredRepoUseCase @Inject constructor(private val githubRepoRepository: GithubRepoRepository) :
     BaseUseCase<String, List<GithubRepoData>> {
 
     override suspend fun invoke(param: String): Result<List<GithubRepoData>> {
