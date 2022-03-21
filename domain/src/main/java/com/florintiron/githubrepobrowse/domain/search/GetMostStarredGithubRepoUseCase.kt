@@ -6,15 +6,16 @@ import com.florintiron.githubrepobrowse.domain.repository.GithubRepoRepository
 import com.florintiron.githubrepobrowse.domain.repository.model.Order
 import com.florintiron.githubrepobrowse.domain.repository.model.Sort
 import com.florintiron.githubrepobrowse.domain.shared.model.GithubRepoData
+import javax.inject.Inject
 
-class GetMostStarredGithubRepoUseCase(private val githubRepoRepository: GithubRepoRepository) :
+class GetMostStarredGithubRepoUseCase @Inject constructor(private val githubRepoRepository: GithubRepoRepository) :
     BaseUseCase<String, List<GithubRepoData>> {
 
     override suspend fun invoke(param: String): Result<List<GithubRepoData>> {
         return githubRepoRepository.getRepositories(
             queryText = param,
             sort = Sort.STARS,
-            order = Order.ASCENDING
+            order = Order.DESCENDING
         )
     }
 }
