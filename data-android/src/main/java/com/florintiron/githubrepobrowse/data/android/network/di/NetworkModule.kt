@@ -1,6 +1,7 @@
 package com.florintiron.githubrepobrowse.data.android.network.di
 
 import com.florintiron.githubrepobrowse.data.android.network.GithubServiceApi
+import com.florintiron.githubrepobrowse.data.android.network.search.datasource.RemoteSearchDataSource
 import com.florintiron.githubrepobrowse.data.android.network.search.datasource.RemoteSearchDataSourceImpl
 import dagger.Module
 import dagger.Provides
@@ -18,7 +19,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://restcountries.eu/rest/v2/"
+    private const val BASE_URL = "https://api.github.com/"
     private const val HEADER_ACCEPT_KEY = "Accept"
     private const val HEADER_ACCEPT_VALUE = "application/vnd.github.v3+json"
 
@@ -58,8 +59,14 @@ object NetworkModule {
         .client(okHttpClient)
         .build()
 
+
     @Singleton
     @Provides
-    fun provideRemoteSearchDataSource(apiService: GithubServiceApi) =
+    fun provideGithubServiceApi(retrofit: Retrofit): GithubServiceApi =
+        retrofit.create(GithubServiceApi::class.java)
+
+    @Singleton
+    @Provides
+    fun provideRemoteSearchDataSource(apiService: GithubServiceApi): RemoteSearchDataSource =
         RemoteSearchDataSourceImpl(apiService)
 }

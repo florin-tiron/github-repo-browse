@@ -25,10 +25,9 @@ fun Order.toRemoteValue() = when (this) {
 
 fun GithubRepo.mapToDomain() = GithubRepoData(
     id = this.id.toString(),
-    name = this.name,
-
-    ownerName = this.owner.login,
-    ownerAvatarUrl = this.owner.avatar_url,
-    starsCount = stargazers_count,
-    language = language
+    name = this.name ?: "",
+    ownerName = this.owner?.login ?: "",
+    ownerAvatarUrl = this.owner?.avatar_url ?: "",
+    starsCount = stargazers_count ?: 0,
+    language = language ?: ""
 )
