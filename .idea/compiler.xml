@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="github-repo-browse.app" target="11" />
+      <module name="github-repo-browse.data-android" target="11" />
+      <module name="github_repo_browse.app" target="1.8" />
+      <module name="github_repo_browse.data-android" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
