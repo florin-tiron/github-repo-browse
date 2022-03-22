@@ -20,7 +20,7 @@ class GetMostStarredRepoUseCaseTest {
     private lateinit var sut: GetMostStarredRepoUseCase
 
     @Test
-    fun `invoke when called return then repository is called`() = runTest {
+    fun `invoke when called then repository is called`() = runTest {
         sut = GetMostStarredRepoUseCase(githubRepoRepository)
         coEvery {
             githubRepoRepository.getRepositories(
@@ -38,7 +38,7 @@ class GetMostStarredRepoUseCaseTest {
     }
 
     @Test
-    fun `invoke when called return success data when repository returns success data`() = runTest {
+    fun `invoke when repository returns success data then return success data`() = runTest {
         sut = GetMostStarredRepoUseCase(githubRepoRepository)
         coEvery {
             githubRepoRepository.getRepositories(
@@ -54,7 +54,7 @@ class GetMostStarredRepoUseCaseTest {
     }
 
     @Test
-    fun `invoke when called return failure data when repository returns failure data`() = runTest {
+    fun `invoke when repository returns failure data then return failure data`() = runTest {
         sut = GetMostStarredRepoUseCase(githubRepoRepository)
         coEvery {
             githubRepoRepository.getRepositories(
