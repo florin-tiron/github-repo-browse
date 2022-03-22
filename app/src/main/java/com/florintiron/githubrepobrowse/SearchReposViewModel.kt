@@ -40,7 +40,6 @@ internal class SearchReposViewModel @Inject constructor(
     private fun initSearchQueryFlow() {
         viewModelScope.launch {
             searchQuery.debounce(DEBOUNCE_TIME_MILLIS).onEach {
-                searchQuery.value = it
                 showLoadingState()
                 performSearch(query = it)
             }.collect()
