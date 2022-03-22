@@ -36,13 +36,10 @@ class GithubRepoSearchRepositoryImpl(
                 val result = remoteRepoDataSource.getGithubRepoList(
                     queryText,
                     sort.toNetworkValue(),
-                    order.toNetworkValue(),
-                    null,
-                    null
+                    order.toNetworkValue()
                 )
                 handleGetRepositoryRequestResponse(result)
             } catch (exception: IOException) {
-                Log.e("GithubRepoSearchRepo", "Exception on request $exception")
                 getLocalData(queryText, sort, order)
             }
         }
@@ -57,7 +54,7 @@ class GithubRepoSearchRepositoryImpl(
             Result.SuccessData(githubRepoList?.map { it.mapToDomain() } ?: emptyList())
         }
     } else {
-        Result.FailureData(NetworkError.ServerError(result.code(), result.message()))
+        Result.FailureData(NetworkError.ServerError(result.code()))
     }
 
     private suspend fun getLocalData(

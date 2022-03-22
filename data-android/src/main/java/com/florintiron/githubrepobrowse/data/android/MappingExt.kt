@@ -52,13 +52,16 @@ fun GithubRepo.mapToEntity() = RepoEntity(
     owner = this.owner?.mapToEntity() ?: OwnerEntity(0, "Unknown", "")
 )
 
-fun Owner.mapToEntity() =
-    OwnerEntity(ownerId = this.id, name = this.login ?: "", avatarUrl = this.avatar_url)
+fun Owner.mapToEntity() = OwnerEntity(
+    ownerId = this.id,
+    name = this.login ?: "",
+    avatarUrl = this.avatar_url
+)
 
 fun RepoEntity.mapToDomain() = GithubRepoData(
     id = this.id.toString(),
     name = this.name ?: "",
-    ownerName = this.owner?.name?: "",
+    ownerName = this.owner?.name ?: "",
     ownerAvatarUrl = this.owner?.avatarUrl ?: "",
     starsCount = this.stars ?: 0,
     language = this.language ?: ""

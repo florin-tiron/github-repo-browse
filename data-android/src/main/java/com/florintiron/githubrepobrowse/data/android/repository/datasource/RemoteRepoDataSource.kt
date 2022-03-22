@@ -10,7 +10,7 @@ interface RemoteRepoDataSource {
         query: String,
         sort: String?,
         sortOrder: String?,
-        resultPerPage: Int?,
+        resultPerPage: Int? = null,
         pageNumber: Int? = null
     ): Response<SearchResponse<GithubRepo>>
 
