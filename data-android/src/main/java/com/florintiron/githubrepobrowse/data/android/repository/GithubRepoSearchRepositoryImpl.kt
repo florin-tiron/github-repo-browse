@@ -1,8 +1,10 @@
 package com.florintiron.githubrepobrowse.data.android.repository
 
+import android.util.Log
 import com.florintiron.githubrepobrowse.data.android.mapToDomain
 import com.florintiron.githubrepobrowse.data.android.mapToEntity
 import com.florintiron.githubrepobrowse.data.android.network.NetworkError
+import com.florintiron.githubrepobrowse.data.android.network.search.model.SearchResponse
 import com.florintiron.githubrepobrowse.data.android.network.shared.model.GithubRepo
 import com.florintiron.githubrepobrowse.data.android.repository.datasource.LocalRepoDataSource
 import com.florintiron.githubrepobrowse.data.android.repository.datasource.RemoteRepoDataSource
@@ -14,6 +16,7 @@ import com.florintiron.githubrepobrowse.domain.repository.model.Order
 import com.florintiron.githubrepobrowse.domain.repository.model.Sort
 import com.florintiron.githubrepobrowse.domain.shared.model.GithubRepoData
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
@@ -37,23 +40,24 @@ class GithubRepoSearchRepositoryImpl(
                     null,
                     null
                 )
-                if (result.isSuccessful) {
-                    result.body()?.items?.also { githubRepoList ->
-                        saveToLocal(githubRepoList)
-                    }.let { githubRepoList ->
-                        Result.SuccessData(githubRepoList?.map { it.mapToDomain() } ?: emptyList())
-                    }
-                } else {
-                    Result.FailureData(NetworkError.ServerError(result.code(), result.message()))
-                }
-            } catch (exception: Exception) {
-                if (exception is IOException) {
-                    getLocalData(queryText, sort, order)
-                } else {
-                    Result.FailureData(exception)
-                }
+                handleGetRepositoryRequestResponse(result)
+            } catch (exception: IOException) {
+                Log.e("GithubRepoSearchRepo", "Exception on request $exception")
+                getLocalData(queryText, sort, order)
             }
         }
+    }
+
+    private suspend fun handleGetRepositoryRequestResponse(
+        result: Response<SearchResponse<GithubRepo>>
+    ) = if (result.isSuccessful) {
+        result.body()?.items?.also { githubRepoList ->
+            saveToLocal(githubRepoList)
+        }.let { githubRepoList ->
+            Result.SuccessData(githubRepoList?.map { it.mapToDomain() } ?: emptyList())
+        }
+    } else {
+        Result.FailureData(NetworkError.ServerError(result.code(), result.message()))
     }
 
     private suspend fun getLocalData(

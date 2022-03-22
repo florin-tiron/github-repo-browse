@@ -1,6 +1,10 @@
 package com.florintiron.githubrepobrowse.data.android.persistence.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Delete
 import com.florintiron.githubrepobrowse.data.android.persistence.model.RepoEntity
 
 @Dao
