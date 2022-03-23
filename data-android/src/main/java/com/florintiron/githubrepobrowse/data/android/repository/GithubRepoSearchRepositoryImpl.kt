@@ -1,6 +1,5 @@
 package com.florintiron.githubrepobrowse.data.android.repository
 
-import android.util.Log
 import com.florintiron.githubrepobrowse.data.android.mapToDomain
 import com.florintiron.githubrepobrowse.data.android.mapToEntity
 import com.florintiron.githubrepobrowse.data.android.network.NetworkError
